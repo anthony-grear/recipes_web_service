@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.Option;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -30,12 +31,17 @@ public class RecipeController {
     }
 
     @DeleteMapping("api/recipe/{id}")
-    public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<?> deleteRecipe(@PathVariable Long id) {
         return service.deleteRecipe(id);
     }
 
     @PutMapping("/api/recipe/{id}")
     public ResponseEntity<?> putRecipe(@Valid @PathVariable Long id, @RequestBody Recipe recipe) {
         return service.updateRecipe(id, recipe);
+    }
+
+    @GetMapping("/api/recipe/search/")
+    public List<Recipe> getRecipeByCategory(@RequestParam (name = "category") String category) {
+        return service.getByCategory(category);
     }
 }
