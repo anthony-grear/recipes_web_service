@@ -36,8 +36,28 @@ public class RecipeService {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
 
-//        return "product removed !! " + id;
+    public ResponseEntity<?> updateRecipe(long id, Recipe newRecipe) {
+            if (repository.existsById(id)) {
+                repository.findById(id)
+                        .map(recipe -> {
+                            recipe.setName(newRecipe.getName());
+                            recipe.setCategory(newRecipe.getCategory());
+                            recipe.setDescription(newRecipe.getDescription());
+                            recipe.setIngredients(newRecipe.getIngredients());
+                            recipe.setDirections(newRecipe.getDirections());
+                            repository.save(recipe);
+                            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                        });
+//                        .orElseGet(() -> {
+//                            repository.save(newRecipe);
+//                            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//                        });
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 //    public Iterable<Recipe> saveProducts(List<Recipe> recipes) {
