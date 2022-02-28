@@ -36,12 +36,17 @@ public class RecipeController {
     }
 
     @PutMapping("/api/recipe/{id}")
-    public ResponseEntity<?> putRecipe(@Valid @PathVariable Long id, @RequestBody Recipe recipe) {
+    public ResponseEntity<?> putRecipe(@Valid @PathVariable Long id,@Valid @RequestBody Recipe recipe) {
         return service.updateRecipe(id, recipe);
     }
 
-    @GetMapping("/api/recipe/search/")
+    @GetMapping(value = "/api/recipe/search/", params = "category")
     public List<Recipe> getRecipeByCategory(@RequestParam (name = "category") String category) {
         return service.getByCategory(category);
+    }
+
+    @GetMapping(value = "/api/recipe/search/", params = "name")
+    public List<Recipe> getRecipeByName(@RequestParam (name = "name") String name) {
+        return service.getByName(name);
     }
 }

@@ -29,13 +29,16 @@ public class Recipe {
     private long id;
 
     @NotBlank
+    @NotNull
     private String name;
 
     @NotBlank
+    @NotNull
     private String description;
 
 
     @NotBlank
+    @NotNull
     private String category;
 
     @UpdateTimestamp
@@ -44,12 +47,14 @@ public class Recipe {
     @ElementCollection
     @CollectionTable(name = "INGREDIENTS", joinColumns = @JoinColumn(name = "id"))
     @NotEmpty
+    @NotNull
     @Size(min = 1)
     private List<String> ingredients;
 
     @ElementCollection
     @CollectionTable(name = "DIRECTIONS", joinColumns = @JoinColumn(name = "id"))
     @NotEmpty
+    @NotNull
     @Size(min = 1)
     private List<String> directions;
 }

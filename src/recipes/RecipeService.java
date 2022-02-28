@@ -64,6 +64,10 @@ public class RecipeService {
         return repository.findByCategoryIgnoreCaseOrderByDateDesc(category);
     }
 
+    public List<Recipe> getByName(String name) {
+        return repository.findByNameIgnoreCaseContainingOrderByDateDesc(name);
+    }
+
 //    public Iterable<Recipe> saveProducts(List<Recipe> recipes) {
 //        return repository.saveAll(recipes);
 //    }
